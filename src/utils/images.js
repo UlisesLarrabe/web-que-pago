@@ -8,5 +8,4 @@ export const IMAGES = {
   flow: "logos/flow.webp",
   clarovideo: "logos/clarovideo.webp",
 };
-
 export const ARRAY_IMAGES = Object.keys(IMAGES).map((key) => IMAGES[key]);
