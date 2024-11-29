@@ -15,7 +15,7 @@ const geistMono = localFont({
 export const metadata = {
   title: "¿Cuando pago?",
   description:
-    "Web hecha para saber cuando pagar tus suscripciones mensuales. ",
+    "Web hecha para saber cuando pagar tus suscripciones mensuales. Desarrollado por Ulises Alejandro Larrabe",
 };
 
 export default function RootLayout({ children }) {
