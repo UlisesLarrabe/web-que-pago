@@ -1,28 +1,13 @@
-import { API_URL } from "@utils/api.js";
 import { cookies } from "next/headers";
 
 export async function POST(req, res) {
-  const body = await req.json();
-  const response = await fetch(`${API_URL}/api/user/login`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(body),
-    credentials: "include",
-  });
-  const data = await response.json();
+  const { token } = await req.json();
 
-  const { status } = data;
-  if (status === "error") {
-    return Response.json({
-      status: "error",
-    });
-  }
+  const allCookies = await cookies();
 
-  cookies().set({
+  allCookies.set({
     name: "access_token",
-    value: data.token,
+    value: token,
     httpOnly: true,
     path: "/",
     expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 7),

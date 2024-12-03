@@ -1,6 +1,7 @@
 "use client";
 import InputForm from "@/components/InputForm";
 import { useForm } from "@/hooks/useForm";
+import { API_URL } from "@/utils/api";
 import Link from "next/link";
 import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
@@ -14,8 +15,9 @@ const LoginPage = () => {
     const { email, password } = form;
 
     try {
-      const res = await fetch(`api/cookies`, {
+      const res = await fetch(`${API_URL}/api/user/loginUser`, {
         method: "POST",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
         },
@@ -27,6 +29,14 @@ const LoginPage = () => {
         toast.error("Email o contraseña incorrectos");
         return;
       }
+      await fetch("api/cookies", {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ token: data.token }),
+      });
       window.location.href = "/home";
     } catch (error) {
       console.log(error);
