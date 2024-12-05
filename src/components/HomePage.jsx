@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import Loader from "./Loader";
 import PreFooter from "./PreFooter";
 import Footer from "./Footer";
+import { API_URL } from "@/utils/api";
 
 export const HomePage = () => {
   const { user, getUser } = useUserContext();
