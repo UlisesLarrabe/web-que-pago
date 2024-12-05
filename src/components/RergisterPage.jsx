@@ -3,7 +3,7 @@ import toast, { Toaster } from "react-hot-toast";
 import InputForm from "./InputForm";
 import Link from "next/link";
 import { useForm } from "@/hooks/useForm";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { API_URL } from "@/utils/api";
 
 const RergisterPage = () => {
