@@ -19,11 +19,15 @@ export const HomePage = () => {
     fetch(`${API_URL}/api/user/getUser`, {
       method: "GET",
       credentials: "include",
-    }).then(async (res) => {
-      if (res.status === 400) {
+    })
+      .then(async (res) => {
+        if (res.status === 400) {
+          window.location.href = "/login";
+        }
+      })
+      .catch((err) => {
         window.location.href = "/login";
-      }
-    });
+      });
   }, []);
 
   return (
