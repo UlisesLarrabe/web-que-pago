@@ -10,7 +10,7 @@
 
 ## Captura de Pantalla
 
-![inicio]("https://res.cloudinary.com/dkp4h602w/image/upload/v1733425297/que-pago_blusxv.webp")
+![App Screenshot](https://res.cloudinary.com/dkp4h602w/image/upload/v1733425297/que-pago_blusxv.webp)
 
 ## Instalación
 
