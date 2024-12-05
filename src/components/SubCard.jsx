@@ -12,7 +12,7 @@ const SubCard = ({ sub }) => {
   const day = expiresOn.get("date");
   const dayToday = dayjs().get("date");
   const hasTime = day - dayToday > 0;
-  const warning = `Faltan ${day - dayToday} dia/s`;
+  const warning = `Faltan ${day - dayToday} día/s`;
 
   return (
     <>
