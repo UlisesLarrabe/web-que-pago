@@ -3,10 +3,21 @@ import InputForm from "@/components/InputForm";
 import { useForm } from "@/hooks/useForm";
 import { API_URL } from "@/utils/api";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 
 const LoginPage = () => {
+  useEffect(() => {
+    fetch(`${API_URL}/api/user/getUser`, {
+      method: "GET",
+      credentials: "include",
+    }).then(async (res) => {
+      if (res.status === 200) {
+        window.location.href = "/home";
+      }
+    });
+  }, []);
+
   const { form, handleInput } = useForm();
   const [isLoading, setIsLoading] = useState(false);
   const handleSubmit = async (e) => {

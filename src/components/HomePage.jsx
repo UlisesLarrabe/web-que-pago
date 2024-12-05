@@ -11,7 +11,7 @@ export const HomePage = () => {
   const { user, getUser } = useUserContext();
 
   useEffect(() => {
-    getUser();
+    getUser().catch(() => (window.location.href = "/login"));
   }, []);
 
   return (
