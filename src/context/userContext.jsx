@@ -31,6 +31,7 @@ export const UserProvider = ({ children }) => {
       const data = await response.json();
       setUser(data);
       getListsOfSubs(data);
+      return { status: response.status };
     } catch (error) {
       console.error(error.message);
     }
