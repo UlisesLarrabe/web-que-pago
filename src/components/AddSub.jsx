@@ -22,10 +22,14 @@ const AddSub = ({ isVisible, setIsVisible, isEditable, sub }) => {
 
   const { form, handleInput, setForm } = useForm(newForm);
 
+  const { title, company, value, currency, expiresOn, isPaid } = form;
+
+  const disabled =
+    isLoading || !title || !company || !value || !currency || !expiresOn;
+
   const handleForm = (e) => {
     e.preventDefault();
     setIsLoading(true);
-    const { title, company, value, currency, expiresOn, isPaid } = form;
     if (!title || !company || !value || !currency || !expiresOn) {
       toast.error("Completa todos los campos");
       setIsLoading(false);
@@ -181,9 +185,9 @@ const AddSub = ({ isVisible, setIsVisible, isEditable, sub }) => {
 
           <button
             className={` ${
-              isLoading && "opacity-40"
+              disabled && "opacity-40"
             } bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-2`}
-            disabled={isLoading}
+            disabled={disabled}
             onClick={isEditable ? handleEditSub : handleSubmit}
           >
             {isLoading ? "Cargando..." : "Guardar"}
@@ -191,9 +195,9 @@ const AddSub = ({ isVisible, setIsVisible, isEditable, sub }) => {
           {isEditable && (
             <button
               className={` ${
-                isLoading && "opacity-40"
+                disabled && "opacity-40"
               } bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mt-2`}
-              disabled={isLoading}
+              disabled={disabled}
               onClick={() => deleteSub(user.subsList._id, sub._id)}
             >
               {isLoading ? "Cargando..." : "Eliminar"}
