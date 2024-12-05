@@ -4,11 +4,11 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
 const Home = async () => {
-  const allCookies = await cookies();
-  const hasCookies = allCookies.has("access_token");
-  if (!hasCookies) {
-    redirect("/login");
-  }
+  // const allCookies = await cookies();
+  // const hasCookies = allCookies.has("access_token");
+  // if (!hasCookies) {
+  //   redirect("/login");
+  // }
 
   return (
     <UserProvider>
