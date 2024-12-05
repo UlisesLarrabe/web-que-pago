@@ -1,4 +1,4 @@
-import animations from "@midudev/tailwind-animations";
+const animations = require("@midudev/tailwind-animations");
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
