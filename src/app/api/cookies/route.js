@@ -20,7 +20,9 @@ export async function POST(req, res) {
     });
   }
 
-  cookies().set({
+  const cookiesMethods = await cookies();
+
+  cookiesMethods.set({
     name: "access_token",
     value: data.token,
     httpOnly: true,
@@ -35,7 +37,9 @@ export async function POST(req, res) {
 }
 
 export async function DELETE() {
-  cookies().delete("access_token");
+  const cookiesMethods = await cookies();
+
+  cookiesMethods.delete("access_token");
   return Response.json({
     status: "success",
   });
