@@ -7,16 +7,12 @@ import Loader from "./Loader";
 import PreFooter from "./PreFooter";
 import Footer from "./Footer";
 
-export const HomePage = () => {
-  const { user, getUser } = useUserContext();
+export const HomePage = ({ user: userProps }) => {
+  const { user, setUser, getListsOfSubs } = useUserContext();
 
   useEffect(() => {
-    getUser().then(async (res) => {
-      if (res.status === 200) {
-        return;
-      }
-      window.location.href = "/login";
-    });
+    setUser(userProps);
+    getListsOfSubs(userProps);
   }, []);
 
   return (

@@ -3,23 +3,12 @@ import toast, { Toaster } from "react-hot-toast";
 import InputForm from "./InputForm";
 import Link from "next/link";
 import { useForm } from "@/hooks/useForm";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { API_URL } from "@/utils/api";
 
 const RergisterPage = () => {
   const { form, handleInput } = useForm();
   const [isLoading, setIsLoading] = useState(false);
-
-  useEffect(() => {
-    fetch(`${API_URL}/api/user/getUser`, {
-      method: "GET",
-      credentials: "include",
-    }).then(async (res) => {
-      if (res.status === 200) {
-        window.location.href = "/home";
-      }
-    });
-  }, []);
 
   const handleSubmit = async (e) => {
     setIsLoading(true);

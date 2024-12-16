@@ -22,24 +22,9 @@ export const UserProvider = ({ children }) => {
     setSubsToPay(toPay);
   };
 
-  const getUser = async () => {
-    try {
-      const response = await fetch(`${API_URL}/api/user/getUser`, {
-        method: "GET",
-        credentials: "include",
-      });
-      const data = await response.json();
-      setUser(data);
-      getListsOfSubs(data);
-      return { status: response.status };
-    } catch (error) {
-      console.error(error.message);
-    }
-  };
-
   const addSub = async (newSub, id) => {
     try {
-      await fetch(`${API_URL}/api/subs/${id}`, {
+      const response = await fetch(`${API_URL}/api/subs/${id}`, {
         method: "POST",
         credentials: "include",
         headers: {
@@ -47,7 +32,12 @@ export const UserProvider = ({ children }) => {
         },
         body: JSON.stringify(newSub),
       });
-      await getUser();
+      const data = await response.json();
+      user.subsList.subs.push(data.sub);
+      getListsOfSubs({
+        ...user,
+      });
+
       return { success: true };
     } catch (error) {
       console.error(error.message);
@@ -56,7 +46,7 @@ export const UserProvider = ({ children }) => {
 
   const editSub = async (newSub, idList, idSub) => {
     try {
-      await fetch(`${API_URL}/api/subs/${idList}/${idSub}`, {
+      const response = await fetch(`${API_URL}/api/subs/${idList}/${idSub}`, {
         method: "PUT",
         credentials: "include",
         headers: {
@@ -64,7 +54,13 @@ export const UserProvider = ({ children }) => {
         },
         body: JSON.stringify(newSub),
       });
-      await getUser();
+      const data = await response.json();
+      const index = user.subsList.subs.findIndex((sub) => sub._id === idSub);
+      user.subsList.subs[index] = data.sub;
+
+      getListsOfSubs({
+        ...user,
+      });
       return { success: true };
     } catch (error) {
       console.error(error);
@@ -77,7 +73,11 @@ export const UserProvider = ({ children }) => {
         method: "DELETE",
         credentials: "include",
       });
-      await getUser();
+      const index = user.subsList.subs.findIndex((sub) => sub._id === idSub);
+      user.subsList.subs.splice(index, 1);
+      getListsOfSubs({
+        ...user,
+      });
       return { success: true };
     } catch (error) {
       console.error(error);
@@ -86,11 +86,16 @@ export const UserProvider = ({ children }) => {
 
   const resetSubs = async (id) => {
     try {
-      await fetch(`${API_URL}/api/subs/${id}`, {
+      const response = await fetch(`${API_URL}/api/subs/${id}`, {
         method: "PUT",
         credentials: "include",
       });
-      await getUser();
+      const data = await response.json();
+      user.subsList.subs = data.subs;
+      getListsOfSubs({
+        ...user,
+      });
+
       return { success: true };
     } catch (error) {
       console.error(error);
@@ -102,13 +107,13 @@ export const UserProvider = ({ children }) => {
       value={{
         user,
         setUser,
-        getUser,
         addSub,
         editSub,
         paidSubs,
         subsToPay,
         deleteSub,
         resetSubs,
+        getListsOfSubs,
       }}
     >
       {children}
