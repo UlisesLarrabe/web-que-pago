@@ -1,4 +1,5 @@
 import RergisterPage from "@/components/RergisterPage";
+import { cookies } from "next/headers";
 
 const Register = async () => {
   const cookie = await cookies();
